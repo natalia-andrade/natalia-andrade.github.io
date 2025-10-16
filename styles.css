@@ -437,6 +437,13 @@ header.scrolled {
     border-radius: 0;
 }
 
+.projeto-foto {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
 .projeto-content {
     padding: var(--spacing-md);
 }
