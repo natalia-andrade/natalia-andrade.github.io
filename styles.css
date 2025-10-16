@@ -241,6 +241,18 @@ header.scrolled {
     font-size: 1.1rem;
 }
 
+.hero-photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    margin: 0 auto;
+    display: block;
+    animation: fadeInUp 0.8s ease;
+}
+
 .hero-title {
     font-size: 4rem;
     margin-bottom: var(--spacing-sm);
@@ -328,7 +340,7 @@ header.scrolled {
 
 .sobre-content {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1fr 1.5fr;
     gap: var(--spacing-lg);
     align-items: start;
 }
@@ -379,6 +391,20 @@ header.scrolled {
     border-radius: 15px;
     background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(210, 105, 30, 0.1));
     border: 3px solid var(--accent-color);
+}
+
+.sobre-photo {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.sobre-photo:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
 /* ====================================
@@ -833,6 +859,11 @@ header.scrolled {
 
     .hero-buttons {
         flex-direction: column;
+    }
+
+    .hero-photo {
+        width: 200px;
+        height: 200px;
     }
 
     .section-title {
