@@ -199,11 +199,14 @@ function loadYouTubeVideos() {
 
 // Função para criar um lightbox simples ao clicar nas imagens
 function initImageLightbox() {
-    const images = document.querySelectorAll('.projeto-image, .sobre-image');
+    const images = document.querySelectorAll('.projeto-image, .sobre-image, .destaque-image');
 
-    images.forEach(img => {
-        img.style.cursor = 'pointer';
-        img.addEventListener('click', function() {
+    images.forEach(container => {
+        container.style.cursor = 'pointer';
+        container.addEventListener('click', function() {
+            const img = this.querySelector('img');
+            if (!img) return;
+
             const lightbox = document.createElement('div');
             lightbox.className = 'lightbox';
             lightbox.style.cssText = `
@@ -212,17 +215,24 @@ function initImageLightbox() {
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: rgba(0, 0, 0, 0.9);
+                background: rgba(0, 0, 0, 0.95);
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 z-index: 9999;
                 cursor: pointer;
+                padding: 20px;
             `;
 
-            const imgClone = this.cloneNode(true);
+            const imgClone = img.cloneNode(true);
             imgClone.style.maxWidth = '90%';
-            imgClone.style.maxHeight = '90%';
+            imgClone.style.maxHeight = '90vh';
+            imgClone.style.width = 'auto';
+            imgClone.style.height = 'auto';
+            imgClone.style.objectFit = 'contain';
+            imgClone.style.objectPosition = 'center';
+            imgClone.style.borderRadius = '8px';
+            imgClone.style.boxShadow = '0 10px 50px rgba(0, 0, 0, 0.5)';
 
             lightbox.appendChild(imgClone);
             document.body.appendChild(lightbox);
@@ -234,8 +244,8 @@ function initImageLightbox() {
     });
 }
 
-// Descomente a linha abaixo se quiser ativar o lightbox
-// initImageLightbox();
+// Ativa o lightbox
+initImageLightbox();
 
 // ====================================
 // GOOGLE CALENDAR INTEGRATION
