@@ -251,14 +251,23 @@ initImageLightbox();
 // GOOGLE CALENDAR INTEGRATION
 // ====================================
 
-// Credenciais da API do Google Calendar
-// As credenciais estão no arquivo config.js (não commitado no Git)
-const CALENDAR_ID = CONFIG.CALENDAR_ID;
-const API_KEY = CONFIG.API_KEY;
-
 // Função para carregar eventos do Google Calendar
 function loadGoogleCalendarEvents() {
     const agendaList = document.getElementById('agenda-list');
+
+    // Verifica se as credenciais estão configuradas
+    if (typeof CONFIG === 'undefined' || !CONFIG.CALENDAR_ID || !CONFIG.API_KEY) {
+        console.warn('Configuração do Google Calendar não encontrada. Configure os secrets no GitHub ou crie config.js localmente.');
+        agendaList.innerHTML = `
+            <div class="no-events-message">
+                <p>Nenhum evento agendado no momento. Fique atento às redes sociais para novidades!</p>
+            </div>
+        `;
+        return;
+    }
+
+    const CALENDAR_ID = CONFIG.CALENDAR_ID;
+    const API_KEY = CONFIG.API_KEY;
 
     // Data de hoje (início)
     const now = new Date();

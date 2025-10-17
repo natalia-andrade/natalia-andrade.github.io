@@ -333,8 +333,8 @@
         </div>
     </footer>
 
-    <!-- Config com credenciais (arquivo local, não commitado) -->
-    <script src="config.js"></script>
+    <!-- Config com credenciais (arquivo local ou gerado pelo GitHub Actions) -->
+    <script src="config.js" onerror="console.log('config.js não encontrado - usando modo sem calendário')"></script>
     <!-- Script principal -->
     <script src="script.js"></script>
 </body>
