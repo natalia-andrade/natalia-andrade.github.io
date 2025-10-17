@@ -445,6 +445,10 @@ header.scrolled {
     display: block;
 }
 
+.projeto-foto.foto-turnera {
+    object-position: center;
+}
+
 .projeto-content {
     padding: var(--spacing-md);
 }
