@@ -199,7 +199,9 @@ function loadYouTubeVideos() {
 
 // Configuração da galeria de destaques
 let currentImageIndex = 0;
+const galleryGrid = document.querySelector('.gallery-grid');
 const galleryItems = document.querySelectorAll('.gallery-item');
+const galleryDots = document.querySelectorAll('.gallery-dot');
 const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.querySelector('.lightbox-image');
 const lightboxTitle = document.querySelector('.lightbox-title');
@@ -207,6 +209,31 @@ const lightboxDescription = document.querySelector('.lightbox-description');
 const lightboxClose = document.querySelector('.lightbox-close');
 const lightboxPrev = document.querySelector('.lightbox-prev');
 const lightboxNext = document.querySelector('.lightbox-next');
+
+// Função para atualizar os dots ativos baseado no scroll
+function updateGalleryDots() {
+    if (window.innerWidth > 768) return; // Só funciona no mobile
+
+    const scrollLeft = galleryGrid.scrollLeft;
+    const itemWidth = galleryItems[0].offsetWidth + parseInt(getComputedStyle(galleryGrid).gap);
+    const currentIndex = Math.round(scrollLeft / itemWidth);
+
+    galleryDots.forEach((dot, index) => {
+        if (index === currentIndex) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+}
+
+// Event listener para scroll na galeria (mobile)
+if (galleryGrid) {
+    galleryGrid.addEventListener('scroll', updateGalleryDots);
+
+    // Atualiza dots ao redimensionar a janela
+    window.addEventListener('resize', updateGalleryDots);
+}
 
 // Função para abrir o lightbox
 function openLightbox(index) {
