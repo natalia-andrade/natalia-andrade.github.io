@@ -799,46 +799,43 @@ header.scrolled {
     transform: translateY(-2px);
 }
 
-.contato-form h3 {
-    color: var(--accent-color);
-    margin-bottom: var(--spacing-md);
-}
-
-.form-group {
-    margin-bottom: var(--spacing-md);
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: var(--spacing-xs);
-    color: var(--text-light);
-    font-weight: 500;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: var(--spacing-sm);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+.contato-whatsapp {
     background-color: rgba(255, 255, 255, 0.05);
-    color: var(--text-light);
-    border-radius: 5px;
-    font-family: var(--font-secondary);
-    font-size: 1rem;
-    transition: all 0.3s ease;
+    padding: var(--spacing-lg);
+    border-radius: 15px;
+    text-align: center;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--accent-color);
+.contato-whatsapp h3 {
+    color: var(--accent-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.contato-whatsapp p {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.8;
+}
+
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
     background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 1rem;
+    font-weight: 500;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.form-group textarea {
-    resize: vertical;
+.btn-whatsapp:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.whatsapp-icon {
+    font-size: 1.2rem;
 }
 
 /* ====================================

@@ -95,55 +95,6 @@ function updateActiveNavOnScroll() {
 }
 
 // ====================================
-// FORMULÁRIO DE CONTATO
-// ====================================
-
-const contactForm = document.getElementById('contactForm');
-
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    // Pega os valores do formulário
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const assunto = document.getElementById('assunto').value;
-    const mensagem = document.getElementById('mensagem').value;
-
-    // Validação básica
-    if (!nome || !email || !assunto || !mensagem) {
-        alert('Por favor, preencha todos os campos!');
-        return;
-    }
-
-    // Aqui você pode adicionar lógica para enviar o formulário
-    // Por exemplo, usando EmailJS, Formspree, ou seu próprio backend
-
-    // Por enquanto, apenas mostra uma mensagem de sucesso
-    alert(`Obrigada pelo contato, ${nome}! Sua mensagem foi enviada com sucesso. Responderei em breve!`);
-
-    // Limpa o formulário
-    contactForm.reset();
-
-    // Exemplo de como seria com EmailJS (você precisa configurar o serviço):
-    /*
-    emailjs.send("seu_service_id", "seu_template_id", {
-        from_name: nome,
-        from_email: email,
-        subject: assunto,
-        message: mensagem
-    }).then(
-        function(response) {
-            alert('Mensagem enviada com sucesso!');
-            contactForm.reset();
-        },
-        function(error) {
-            alert('Erro ao enviar mensagem. Tente novamente.');
-        }
-    );
-    */
-});
-
-// ====================================
 // ANIMAÇÕES AO SCROLL (Intersection Observer)
 // ====================================
 
