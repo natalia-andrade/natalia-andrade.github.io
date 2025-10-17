@@ -287,6 +287,132 @@ function initImageLightbox() {
 // initImageLightbox();
 
 // ====================================
+// GOOGLE CALENDAR INTEGRATION
+// ====================================
+
+// Credenciais da API do Google Calendar
+const CALENDAR_ID = '6f3cddf2c741b7604697f640ab2854162c14db1b8bcdb4271a96d2be463296e8@group.calendar.google.com';
+const API_KEY = 'AIzaSyBydLJSqnibj4RiohrxZCVp1au6hJoOWo8';
+
+// Função para carregar eventos do Google Calendar
+function loadGoogleCalendarEvents() {
+    const agendaList = document.getElementById('agenda-list');
+
+    // Data de hoje (início)
+    const now = new Date();
+    const timeMin = now.toISOString();
+
+    // Data máxima (3 meses a partir de hoje)
+    const maxDate = new Date();
+    maxDate.setMonth(maxDate.getMonth() + 3);
+    const timeMax = maxDate.toISOString();
+
+    // URL da API do Google Calendar
+    const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?key=${API_KEY}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=true&orderBy=startTime&maxResults=10`;
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao carregar eventos');
+            }
+            return response.json();
+        })
+        .then(data => {
+            agendaList.innerHTML = ''; // Limpa mensagem de carregamento
+
+            if (!data.items || data.items.length === 0) {
+                agendaList.innerHTML = `
+                    <div class="no-events-message">
+                        <p>Nenhum evento agendado no momento. Fique atento às redes sociais para novidades!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Cria um card para cada evento
+            data.items.forEach(event => {
+                const eventCard = createEventCard(event);
+                agendaList.appendChild(eventCard);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao carregar eventos do Google Calendar:', error);
+            agendaList.innerHTML = `
+                <div class="error-message">
+                    <p>Não foi possível carregar os eventos. Tente novamente mais tarde.</p>
+                </div>
+            `;
+        });
+}
+
+// Função para criar um card de evento
+function createEventCard(event) {
+    const card = document.createElement('div');
+    card.className = 'evento-card';
+
+    // Data do evento
+    const startDate = event.start.dateTime ? new Date(event.start.dateTime) : new Date(event.start.date);
+    const dia = startDate.getDate();
+    const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
+    const mes = meses[startDate.getMonth()];
+
+    // Horário (se disponível)
+    let horaHtml = '';
+    if (event.start.dateTime) {
+        const hora = startDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        horaHtml = `<p class="evento-hora">🕒 ${hora}</p>`;
+    }
+
+    // Local (se disponível)
+    let localHtml = '';
+    if (event.location) {
+        localHtml = `<p class="evento-local">📍 ${event.location}</p>`;
+    }
+
+    // Descrição (se disponível)
+    let descricaoHtml = '';
+    if (event.description) {
+        // Limita a descrição a 150 caracteres
+        const descricao = event.description.length > 150
+            ? event.description.substring(0, 150) + '...'
+            : event.description;
+        descricaoHtml = `<p class="evento-descricao">${descricao}</p>`;
+    }
+
+    // Link "Mais Info" (se houver link no evento ou descrição)
+    let actionHtml = '';
+    if (event.htmlLink) {
+        actionHtml = `
+            <div class="evento-action">
+                <a href="${event.htmlLink}" target="_blank" class="btn btn-small">Mais Info</a>
+            </div>
+        `;
+    }
+
+    // Monta o HTML do card
+    card.innerHTML = `
+        <div class="evento-data">
+            <span class="dia">${dia}</span>
+            <span class="mes">${mes}</span>
+        </div>
+        <div class="evento-info">
+            <h3>${event.summary || 'Evento sem título'}</h3>
+            ${localHtml}
+            ${horaHtml}
+            ${descricaoHtml}
+        </div>
+        ${actionHtml}
+    `;
+
+    return card;
+}
+
+// Carrega eventos quando a página é carregada
+window.addEventListener('load', () => {
+    loadGoogleCalendarEvents();
+});
+
+// ====================================
 // CONSOLE MESSAGE
 // ====================================
 

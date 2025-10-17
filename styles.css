@@ -716,6 +716,32 @@ header.scrolled {
     align-items: center;
 }
 
+/* Mensagens de estado da agenda */
+.loading-message,
+.no-events-message,
+.error-message {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    color: var(--text-dark);
+}
+
+.loading-message {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+.no-events-message {
+    color: var(--text-muted);
+}
+
+.error-message {
+    color: #d32f2f;
+    background-color: rgba(211, 47, 47, 0.1);
+    border: 1px solid rgba(211, 47, 47, 0.3);
+}
+
 /* ====================================
    SEÇÃO CONTATO
    ==================================== */
