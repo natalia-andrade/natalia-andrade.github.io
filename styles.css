@@ -489,65 +489,56 @@ header.scrolled {
    SEÇÃO DESTAQUES - GALERIA
    ==================================== */
 
+/* Desktop: estilo de cards */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-md);
-    margin-top: var(--spacing-lg);
 }
 
 .gallery-item {
-    position: relative;
-    overflow: hidden;
+    background-color: #fff;
     border-radius: 15px;
-    cursor: pointer;
-    aspect-ratio: 4/3;
+    overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    flex-shrink: 0;
+    cursor: pointer;
 }
 
 .gallery-item:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .gallery-image {
     width: 100%;
-    height: 100%;
+    height: 250px;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    object-position: center top;
+    transition: all 0.3s ease;
+    display: block;
 }
 
 .gallery-item:hover .gallery-image {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .gallery-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    color: white;
     padding: var(--spacing-md);
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover .gallery-overlay {
-    transform: translateY(0);
+    position: relative;
+    background: transparent;
 }
 
 .gallery-info h3 {
-    font-size: 1.2rem;
-    margin-bottom: var(--spacing-xs);
-    color: var(--text-light);
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-color);
 }
 
 .gallery-info p {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-dark);
 }
 
 /* Indicadores de scroll para mobile */
@@ -1058,15 +1049,38 @@ header.scrolled {
         min-width: 85%;
         max-width: 85%;
         transform: none !important;
+        flex-shrink: 0;
+        aspect-ratio: 4/3;
+        position: relative;
     }
 
     .gallery-item:hover {
         transform: none !important;
     }
 
+    .gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
     .gallery-overlay {
-        transform: translateY(0);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
         background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3));
+        padding: var(--spacing-md);
+    }
+
+    .gallery-info h3 {
+        color: var(--text-light);
+        font-size: 1.2rem;
+    }
+
+    .gallery-info p {
+        color: rgba(255, 255, 255, 0.9);
     }
 
     .gallery-dots {
