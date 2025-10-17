@@ -291,8 +291,9 @@ function initImageLightbox() {
 // ====================================
 
 // Credenciais da API do Google Calendar
-const CALENDAR_ID = '6f3cddf2c741b7604697f640ab2854162c14db1b8bcdb4271a96d2be463296e8@group.calendar.google.com';
-const API_KEY = 'AIzaSyBydLJSqnibj4RiohrxZCVp1au6hJoOWo8';
+// As credenciais estão no arquivo config.js (não commitado no Git)
+const CALENDAR_ID = CONFIG.CALENDAR_ID;
+const API_KEY = CONFIG.API_KEY;
 
 // Função para carregar eventos do Google Calendar
 function loadGoogleCalendarEvents() {
@@ -379,12 +380,21 @@ function createEventCard(event) {
         descricaoHtml = `<p class="evento-descricao">${descricao}</p>`;
     }
 
-    // Link "Mais Info" (se houver link no evento ou descrição)
+    // Link para adicionar no calendário do usuário
     let actionHtml = '';
-    if (event.htmlLink) {
+    if (event.start.dateTime || event.start.date) {
+        // Cria URL do Google Calendar para adicionar evento
+        const startTime = event.start.dateTime ? event.start.dateTime.replace(/[-:]/g, '').split('.')[0] + 'Z' : event.start.date.replace(/-/g, '') + 'T000000Z';
+        const endTime = event.end.dateTime ? event.end.dateTime.replace(/[-:]/g, '').split('.')[0] + 'Z' : event.end.date.replace(/-/g, '') + 'T235959Z';
+        const titulo = encodeURIComponent(event.summary || 'Evento');
+        const descricao = encodeURIComponent(event.description || '');
+        const local = encodeURIComponent(event.location || '');
+
+        const addToCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${titulo}&dates=${startTime}/${endTime}&details=${descricao}&location=${local}`;
+
         actionHtml = `
             <div class="evento-action">
-                <a href="${event.htmlLink}" target="_blank" class="btn btn-small">Mais Info</a>
+                <a href="${addToCalendarUrl}" target="_blank" class="btn btn-small">Adicionar ao Calendário</a>
             </div>
         `;
     }
