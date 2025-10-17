@@ -27,6 +27,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Create .nojekyll file
+        run: touch .nojekyll
+
       - name: Generate config.js from secrets
         run: |
           cat > config.js << 'EOF'
@@ -42,6 +45,13 @@ jobs:
           };
           EOF
           echo "✅ config.js gerado com sucesso"
+          ls -la config.js
+          cat config.js
+
+      - name: List files to be deployed
+        run: |
+          echo "Arquivos que serão enviados:"
+          ls -la
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
