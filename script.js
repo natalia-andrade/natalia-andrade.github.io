@@ -114,7 +114,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Elementos para animar
-const animateElements = document.querySelectorAll('.projeto-card, .video-card, .evento-card, .aulas-card');
+const animateElements = document.querySelectorAll('.projeto-card, .destaque-card, .evento-card, .aulas-card');
 
 animateElements.forEach(el => {
     el.style.opacity = '0';
