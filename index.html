@@ -154,49 +154,63 @@
             <h2 class="section-title">Destaques</h2>
             <p class="section-description">Momentos e experiências que marcaram minha trajetória</p>
 
-            <div class="destaques-grid">
-                <!-- Card 1 -->
-                <div class="destaque-card">
-                    <div class="destaque-image">
-                        <img src="images/destaque-daniel-wolff.jpeg" alt="Daniel Wolff" class="destaque-foto foto-foco-top">
-                    </div>
-                    <div class="destaque-content">
-                        <h3>Masterclass com Daniel Wolff</h3>
-                        <p>2022</p> <!-- 2022.10.18 -->
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="destaque-card">
-                    <div class="destaque-image">
-                        <img src="images/destaque-yuri-marchese.jpeg" alt="Yuri Marchese" class="destaque-foto foto-foco-top">
-                    </div>
-                    <div class="destaque-content">
-                        <h3>Masterclass com Yuri Marchese</h3>
-                        <p>2025</p> <!-- 2025.04.14 -->
-                    </div>
-                </div>
-               
-                <!-- Card 3 -->
-                <div class="destaque-card">
-                    <div class="destaque-image">
-                        <img src="images/destaque-gilu.jpeg" alt="Gilu" class="destaque-foto foto-foco-top">
-                    </div>
-                    <div class="destaque-content">
-                        <h3>Abertura do show de Gilu Amaral</h3>
+            <div class="gallery-grid">
+                <!-- Foto 1 -->
+                <div class="gallery-item" data-title="Masterclass com Daniel Wolff" data-description="2022">
+                    <img src="images/destaque-daniel-wolff.jpeg" alt="Masterclass com Daniel Wolff" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Masterclass com Daniel Wolff</h3>
+                            <p>2022</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Card 4 -->
-                <div class="destaque-card">
-                    <div class="destaque-image">
-                        <img src="images/destaque-premio-cultura-2024.12.19.jpg" alt="Indicação ao prêmio Hangar de Cultura 2024" class="destaque-foto">
-                    </div>
-                    <div class="destaque-content">
-                        <h3>Prêmio Hangar de Cultura 2024</h3>
-                        <p>Indicação do álbum "Cantos de Transição" ao prêmio Hangar de Cultura 2024</p> <!--2024.12.19-->
+                <!-- Foto 2 -->
+                <div class="gallery-item" data-title="Masterclass com Yuri Marchese" data-description="2025">
+                    <img src="images/destaque-yuri-marchese.jpeg" alt="Masterclass com Yuri Marchese" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Masterclass com Yuri Marchese</h3>
+                            <p>2025</p>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Foto 3 -->
+                <div class="gallery-item" data-title="Abertura do show de Gilu Amaral" data-description="">
+                    <img src="images/destaque-gilu.jpeg" alt="Abertura do show de Gilu Amaral" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Abertura do show de Gilu Amaral</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Foto 4 -->
+                <div class="gallery-item" data-title="Prêmio Hangar de Cultura 2024" data-description='Indicação do álbum "Cantos de Transição" ao prêmio Hangar de Cultura 2024'>
+                    <img src="images/destaque-premio-cultura-2024.12.19.jpg" alt="Prêmio Hangar de Cultura 2024" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Prêmio Hangar de Cultura 2024</h3>
+                            <p>Indicação do álbum "Cantos de Transição"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Lightbox -->
+        <div id="lightbox" class="lightbox">
+            <span class="lightbox-close">&times;</span>
+            <div class="lightbox-content">
+                <button class="lightbox-prev">&#10094;</button>
+                <img class="lightbox-image" src="" alt="">
+                <button class="lightbox-next">&#10095;</button>
+            </div>
+            <div class="lightbox-caption">
+                <h3 class="lightbox-title"></h3>
+                <p class="lightbox-description"></p>
             </div>
         </div>
     </section>

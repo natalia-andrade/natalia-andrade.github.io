@@ -114,7 +114,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Elementos para animar
-const animateElements = document.querySelectorAll('.projeto-card, .destaque-card, .evento-card, .aulas-card');
+const animateElements = document.querySelectorAll('.projeto-card, .gallery-item, .evento-card, .aulas-card');
 
 animateElements.forEach(el => {
     el.style.opacity = '0';
@@ -194,12 +194,99 @@ function loadYouTubeVideos() {
 // loadYouTubeVideos();
 
 // ====================================
-// GALERIA DE IMAGENS (OPCIONAL)
+// GALERIA DE IMAGENS
 // ====================================
 
-// Função para criar um lightbox simples ao clicar nas imagens
+// Configuração da galeria de destaques
+let currentImageIndex = 0;
+const galleryItems = document.querySelectorAll('.gallery-item');
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.querySelector('.lightbox-image');
+const lightboxTitle = document.querySelector('.lightbox-title');
+const lightboxDescription = document.querySelector('.lightbox-description');
+const lightboxClose = document.querySelector('.lightbox-close');
+const lightboxPrev = document.querySelector('.lightbox-prev');
+const lightboxNext = document.querySelector('.lightbox-next');
+
+// Função para abrir o lightbox
+function openLightbox(index) {
+    currentImageIndex = index;
+    const item = galleryItems[index];
+    const img = item.querySelector('.gallery-image');
+    const title = item.getAttribute('data-title');
+    const description = item.getAttribute('data-description');
+
+    lightboxImage.src = img.src;
+    lightboxImage.alt = img.alt;
+    lightboxTitle.textContent = title;
+    lightboxDescription.textContent = description;
+
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Previne scroll do body
+}
+
+// Função para fechar o lightbox
+function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = ''; // Restaura scroll do body
+}
+
+// Função para navegar para imagem anterior
+function showPreviousImage() {
+    currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+    openLightbox(currentImageIndex);
+}
+
+// Função para navegar para próxima imagem
+function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+    openLightbox(currentImageIndex);
+}
+
+// Event listeners para os itens da galeria
+galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+        openLightbox(index);
+    });
+});
+
+// Event listener para fechar o lightbox
+lightboxClose.addEventListener('click', closeLightbox);
+
+// Event listeners para navegação
+lightboxPrev.addEventListener('click', (e) => {
+    e.stopPropagation();
+    showPreviousImage();
+});
+
+lightboxNext.addEventListener('click', (e) => {
+    e.stopPropagation();
+    showNextImage();
+});
+
+// Fechar ao clicar fora da imagem
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+        closeLightbox();
+    }
+});
+
+// Navegação por teclado
+document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+
+    if (e.key === 'Escape') {
+        closeLightbox();
+    } else if (e.key === 'ArrowLeft') {
+        showPreviousImage();
+    } else if (e.key === 'ArrowRight') {
+        showNextImage();
+    }
+});
+
+// Função para criar um lightbox simples ao clicar nas imagens de outras seções
 function initImageLightbox() {
-    const images = document.querySelectorAll('.projeto-image, .sobre-image, .destaque-image');
+    const images = document.querySelectorAll('.projeto-image, .sobre-image');
 
     images.forEach(container => {
         container.style.cursor = 'pointer';
@@ -207,9 +294,9 @@ function initImageLightbox() {
             const img = this.querySelector('img');
             if (!img) return;
 
-            const lightbox = document.createElement('div');
-            lightbox.className = 'lightbox';
-            lightbox.style.cssText = `
+            const simpleLightbox = document.createElement('div');
+            simpleLightbox.className = 'simple-lightbox';
+            simpleLightbox.style.cssText = `
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -234,17 +321,17 @@ function initImageLightbox() {
             imgClone.style.borderRadius = '8px';
             imgClone.style.boxShadow = '0 10px 50px rgba(0, 0, 0, 0.5)';
 
-            lightbox.appendChild(imgClone);
-            document.body.appendChild(lightbox);
+            simpleLightbox.appendChild(imgClone);
+            document.body.appendChild(simpleLightbox);
 
-            lightbox.addEventListener('click', function() {
-                document.body.removeChild(lightbox);
+            simpleLightbox.addEventListener('click', function() {
+                document.body.removeChild(simpleLightbox);
             });
         });
     });
 }
 
-// Ativa o lightbox
+// Ativa o lightbox para outras seções
 initImageLightbox();
 
 // ====================================
